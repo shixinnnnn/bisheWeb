@@ -1,0 +1,106 @@
+<mvc:View
+	controllerName="sap.ui.demo.toolpageapp.controller.hospitalManage"
+	xmlns="sap.uxap"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<m:Page
+		showHeader="{device>/system/phone}"
+		showNavButton="{device>/system/phone}"
+		navButtonPress=".onNavButtonPress">
+		<m:landmarkInfo>
+			<m:PageAccessibleLandmarkInfo
+				rootRole="Region"
+				rootLabel="{i18n>SystemSettings_rootLabel}"
+				contentRole="Main"
+				contentLabel="{i18n>SystemSettings_contentLabel}"/>
+		</m:landmarkInfo>
+		<ObjectPageLayout id="objectPageLayout">
+			<headerTitle>
+				<ObjectPageHeader
+					objectTitle="{i18n>sideContentManageHospitals}"
+					objectSubtitle="{i18n>systemSettingsDescriptionTitle}"/>
+			</headerTitle>
+			<headerContent>
+				<m:MessageStrip
+					text="{
+						parts: [
+							'i18n>systemSettingsLastLoginTitle',
+							'view>/currentUser',
+							'view>/lastLogin'
+						],
+						formatter: '.formatter.formatMessage'
+					}"
+					type="Information"
+					showIcon="true">
+				</m:MessageStrip>
+			</headerContent>
+			<sections>
+				<ObjectPageSection>
+				<subSections>
+					<ObjectPageSubSection
+						id="shopOwnerId">
+						<blocks>
+							<ObjectPageLazyLoader
+								id="shopOwnerLazyLoader">
+								<f:SimpleForm
+									columnsL="2"
+									columnsM="2"
+									editable="true"
+									layout="ResponsiveGridLayout">
+									<f:content>
+                                            <m:VBox >
+                                                <m:SearchField width="50%" class="sapUiSmallMargin" liveChange="searchChange" search="freesearch"/>
+                                                <m:Table 
+                                                    id="table"
+                                                    busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+                                                    growing="true"
+                                                    growingScrollToLoad="true"
+                                                    noDataText="{worklistView>/tableNoDataText}"
+                                                    updateFinished=".onUpdateFinished"
+                                                    width="auto"
+                                                    mode="MultiSelect"
+                                                    items="{hospital>/}">
+                                                    <m:columns>
+                                                        <m:Column id="TitleColumn">
+                                                            <m:Text
+                                                                id="hospitalIDColumn"
+                                                                text="医院ID"/>
+                                                        </m:Column>	
+                                                        <m:Column id="ToggleBtnColumn">
+                                                            <m:Text
+                                                                id="hospitalNameColumn"
+                                                                text="医院名称"/>
+                                                        </m:Column>						
+                                                    </m:columns>
+                                                <m:items>
+                                                    <m:ColumnListItem
+                                                        type="Navigation"
+                                                        press=".onPress">
+                                                        <m:cells>
+                                                            <m:ObjectIdentifier
+                                                                text="{hospital>hospitalID}"/>
+                                                            <m:ObjectIdentifier
+                                                                text="{hospital>hospital}"/>                     
+                                                        </m:cells>
+                                                    </m:ColumnListItem>
+                                                </m:items>
+                                                </m:Table>
+                                                <m:HBox>
+                                                    <m:Button text="添加" press="onAdd"/>
+                                                    <m:Button text="编辑" press="onEdit"/>
+                                                    <m:Button text="删除" press="onDelete"/>
+                                                </m:HBox>	
+                                            </m:VBox>							
+									</f:content>
+								</f:SimpleForm>
+							</ObjectPageLazyLoader>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+				</ObjectPageSection>
+			</sections>
+		</ObjectPageLayout>
+	</m:Page>
+</mvc:View>

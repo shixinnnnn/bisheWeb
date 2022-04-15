@@ -1,0 +1,127 @@
+<mvc:View
+	controllerName="sap.ui.demo.toolpageapp.controller.inspectorManage"
+	xmlns="sap.uxap"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<m:Page
+		showHeader="{device>/system/phone}"
+		showNavButton="{device>/system/phone}"
+		navButtonPress=".onNavButtonPress">
+		<m:landmarkInfo>
+			<m:PageAccessibleLandmarkInfo
+				rootRole="Region"
+				rootLabel="{i18n>SystemSettings_rootLabel}"
+				contentRole="Main"
+				contentLabel="{i18n>SystemSettings_contentLabel}"/>
+		</m:landmarkInfo>
+		<ObjectPageLayout id="objectPageLayout">
+			<headerTitle>
+				<ObjectPageHeader
+					objectTitle="{i18n>sideContentManageInspectors}"
+					objectSubtitle="{i18n>systemSettingsDescriptionTitle}"/>
+			</headerTitle>
+			<headerContent>
+				<m:MessageStrip
+					text="{
+						parts: [
+							'i18n>systemSettingsLastLoginTitle',
+							'view>/currentUser',
+							'view>/lastLogin'
+						],
+						formatter: '.formatter.formatMessage'
+					}"
+					type="Information"
+					showIcon="true">
+				</m:MessageStrip>
+			</headerContent>
+			<sections>
+				<ObjectPageSection>
+				<subSections>
+					<ObjectPageSubSection
+						id="shopOwnerId">
+						<blocks>
+							<ObjectPageLazyLoader
+								id="shopOwnerLazyLoader">
+								<f:SimpleForm
+									columnsL="2"
+									columnsM="2"
+									editable="true"
+									layout="ResponsiveGridLayout">
+									<f:content>
+                                            <m:VBox >
+                                                <m:SearchField width="50%" class="sapUiSmallMargin" liveChange="searchChange" search="freesearch"/>
+                                                <m:Table 
+                                                    id="table"
+                                                    busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+                                                    growing="true"
+                                                    growingScrollToLoad="true"
+                                                    noDataText="{worklistView>/tableNoDataText}"
+                                                    updateFinished=".onUpdateFinished"
+                                                    width="auto"
+                                                    mode="MultiSelect"
+                                                    items="{inspector>/}">
+                                                    <m:columns>
+                                                        <m:Column id="inspectorIDColumn">
+                                                            <m:Text
+                                                                id="inspectorID"
+                                                                text="检测员ID"/>
+                                                        </m:Column>	
+                                                        <m:Column id="inspectorNameColumn">
+                                                            <m:Text
+                                                                id="inspectorName"
+                                                                text="检测员姓名"/>
+                                                        </m:Column>
+                                                        <m:Column id="emailColumn">
+                                                            <m:Text
+                                                                id="email"
+                                                                text="注册邮箱"/>
+                                                        </m:Column>	
+                                                        <m:Column id="passwordColumn">
+                                                            <m:Text
+                                                                id="password"
+                                                                text="登陆密码"/>
+                                                        </m:Column>
+                                                        <m:Column id="itemIDColumn">
+                                                            <m:Text
+                                                                id="itemID"
+                                                                text="检测项目ID"/>
+                                                        </m:Column>								
+                                                    </m:columns>
+                                                <m:items>
+                                                    <m:ColumnListItem
+                                                        type="Navigation"
+                                                        press=".onPress">
+                                                        <m:cells>
+                                                            <m:ObjectIdentifier
+                                                                text="{inspector>inspectorID}"/>
+                                                            <m:ObjectIdentifier
+                                                                text="{inspector>name}"/> 
+                                                            <m:ObjectIdentifier
+                                                                text="{inspector>email}"/> 
+                                                            <m:ObjectIdentifier
+                                                                text="{inspector>password}"/> 
+                                                            <m:ObjectIdentifier
+                                                                text="{inspector>itemID}"/>     
+                                                        </m:cells>
+                                                    </m:ColumnListItem>
+                                                </m:items>
+                                                </m:Table>
+                                                <m:HBox>
+                                                    <m:Button text="添加" press="onAdd"/>
+                                                    <m:Button text="编辑" press="onEdit"/>
+                                                    <m:Button text="删除" press="onDelete"/>
+                                                </m:HBox>	
+                                            </m:VBox>							
+									</f:content>
+								</f:SimpleForm>
+							</ObjectPageLazyLoader>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+				</ObjectPageSection>
+			</sections>
+		</ObjectPageLayout>
+	</m:Page>
+</mvc:View>

@@ -1,0 +1,112 @@
+{
+	"selectedKey": "",
+
+	"navigation": [
+		{
+			"titleI18nKey": "sideContentHome",
+			"icon": "sap-icon://home",
+			"expanded": true,
+			"key": "",
+			"items": []
+		},
+		{
+			"titleI18nKey": "sideContentSettings",
+			"icon": "sap-icon://settings",
+			"expanded": false,
+			"key": "masterSettings",
+			"items": []
+		},
+		{
+			"titleI18nKey": "sideContentStatistics",
+			"icon": "sap-icon://line-chart",
+			"expanded": true,
+			"key": "statistics",
+			"items": [
+				{
+					"titleI18nKey": "sideContentUsageStatistics",
+					"key": "usageStatistics"
+				},
+				{
+					"titleI18nKey": "sideContentOrderStatistics",
+					"key": "orderStatistics"
+				}
+			]
+		},
+		{
+			"titleI18nKey": "sideContentManageHospitals",
+			"icon": "sap-icon://accidental-leave",
+			"expanded": false,
+			"key": "manageHospitals",
+			"items": []
+		},
+		{
+			"titleI18nKey": "sideContentManageItems",
+			"icon": "sap-icon://lab",
+			"expanded": false,
+			"key": "manageItems",
+			"items": []
+		},
+		{
+			"titleI18nKey": "sideContentManageInspectors",
+			"icon": "sap-icon://employee",
+			"expanded": false,
+			"key": "manageInspectors",
+			"items": []
+		},
+		{
+			"titleI18nKey": "sideContentJurisdiction",
+			"icon": "sap-icon://activate",
+			"expanded": true,
+			"key": "jurisdiction",
+			"items": [
+				{
+					"titleI18nKey": "sideContentUsageStatistics",
+					"key": "usageStatistics"
+				},
+				{
+					"titleI18nKey": "sideContentOrderStatistics",
+					"key": "orderStatistics"
+				}
+			]
+		}
+	],
+	"fixedNavigation": [
+		{
+			"titleI18nKey": "sideContentImportantLinks",
+			"icon": "sap-icon://chain-link",
+			"key": "importantLinks"
+		},
+		{
+			"titleI18nKey": "sideContentLegal",
+			"icon": "sap-icon://compare",
+			"key": "legal"
+		}
+	],
+	"masterSettings": [
+		{
+			"titleI18nKey": "sideContentSystemSettings",
+			"key": "systemSettings",
+			"selected": true
+		},
+		{
+			"titleI18nKey": "sideContentOrderSettings",
+			"key": "orderSettings",
+			"selected": false
+		},
+		{
+			"titleI18nKey": "sideContentSupplierSettings",
+			"key": "supplierSettings",
+			"selected": false
+		},
+		{
+			"titleI18nKey": "sideContentCampaignSettings",
+			"key": "campaignSettings",
+			"selected": false
+		},
+		{
+			"titleI18nKey": "sideContentShippingSettings",
+			"key": "shippingSettings",
+			"selected": false
+		}
+	]
+}

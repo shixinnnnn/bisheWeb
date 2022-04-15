@@ -1,0 +1,41 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+    <Dialog>
+        <form:SimpleForm
+			title="编辑检测员"
+			minWidth="1024"
+			maxContainerCols="2"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			labelSpanL="3"
+			labelSpanM="3"
+			emptySpanL="4"
+			emptySpanM="4"
+			columnsL="1"
+			columnsM="1">
+			<form:content>       
+                <VBox>           
+                    <Label text="检测员姓名" required="true"/>
+                    <Input id="inspectorName" placeholder="请输入检测员姓名" value="{editInspector>/name}"/>  
+
+                    <Label text="注册邮箱" />
+                    <Input id="email" placeholder="请输入注册邮箱" value="{editInspector>/email}"/>
+
+                    <Label text="登陆密码" />
+                    <Input id="password" placeholder="请输入登陆密码" value="{editInspector>/password}"/>
+
+                    <Label text="检测项目ID" />
+                    <Input id="itemID" placeholder="请输入检测项目ID" value="{editInspector>/itemID}"/>          
+                    <HBox>
+						<Button text="save" type="Emphasized" press=".onSaveEdit"/>
+                        <Button text="cancel" press="onCloseEditDialog"/>  
+                    </HBox>
+                </VBox>   
+            </form:content>
+		</form:SimpleForm>
+    </Dialog>
+</core:FragmentDefinition>
+

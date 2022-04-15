@@ -1,0 +1,48 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+    <Dialog>
+        <form:SimpleForm
+			title="编辑检测项目"
+			minWidth="1024"
+			maxContainerCols="2"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			labelSpanL="3"
+			labelSpanM="3"
+			emptySpanL="4"
+			emptySpanM="4"
+			columnsL="1"
+			columnsM="1">
+			<form:content> 
+                <VBox>                 
+                    <Label text="检测项目名称" required="true"/>
+                    <Input id="itemName" placeholder="请输入检测项目名称" value="{editItem>/inspectionItem}"/>    
+
+                    <Label text="检测项目价格" required="true"/>
+                    <Input id="price" placeholder="请输入检测项目价格" value="{editItem>/price}"/>
+
+                    <Label text="检测结果项" required="true"/>
+                    <Input id="result" placeholder="请输入检测结果项（以英文逗号分隔）" value="{editItem>/testItem}"/>
+
+                    <Label text="检测展示图片url" required="true"/>
+                    <HBox>                           
+                        <Input id="picture" placeholder="请输入检测展示图片url" value="{editItem>/picture}"/>
+                        <Button text="预览" press="foreseePic"/>                          
+                    </HBox>
+                    <Image id="foresawPic" width="80%"/>
+
+                    <Label text="检测项目简介" required="true"/>
+                    <Input id="description" placeholder="请输入检测项目简介" value="{editItem>/description}"/>          
+                    <HBox>
+                        <Button text="save" type="Emphasized" press=".onSaveEdit"/>
+                        <Button text="cancel" press="onCloseEditDialog"/>  
+                    </HBox>
+                </VBox> 
+            </form:content>
+		</form:SimpleForm>
+    </Dialog>
+</core:FragmentDefinition>
+

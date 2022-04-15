@@ -1,0 +1,30 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+    <Dialog>
+        <form:SimpleForm
+			title="添加医院信息"
+			minWidth="1024"
+			maxContainerCols="2"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			labelSpanL="3"
+			labelSpanM="3"
+			emptySpanL="4"
+			emptySpanM="4"
+			columnsL="1"
+			columnsM="1">
+			<form:content>                  
+                        <Label text="医院名称" required="true"/>
+                        <Input id="hospitalName" placeholder="请输入医院名称"/>                 
+                    <HBox>
+						<Button text="save" type="Emphasized" press=".onSaveAdd"/>
+                        <Button text="cancel" press="onCloseAddDialog"/>  
+                    </HBox>
+            </form:content>
+		</form:SimpleForm>
+    </Dialog>
+</core:FragmentDefinition>
+
