@@ -18,6 +18,9 @@
 			columnsM="1">
 			<form:content>       
                 <VBox>           
+                    <Label text="检测员ID"/>
+                    <Text id="inspectorID" text="{editInspector>/inspectorID}"/>
+
                     <Label text="检测员姓名" required="true"/>
                     <Input id="inspectorName" placeholder="请输入检测员姓名" value="{editInspector>/name}"/>  
 
@@ -25,10 +28,16 @@
                     <Input id="email" placeholder="请输入注册邮箱" value="{editInspector>/email}"/>
 
                     <Label text="登陆密码" />
-                    <Input id="password" placeholder="请输入登陆密码" value="{editInspector>/password}"/>
+                    <Input id="password" placeholder="请输入登陆密码" value="{editInspector>/password}"/>   
 
-                    <Label text="检测项目ID" />
-                    <Input id="itemID" placeholder="请输入检测项目ID" value="{editInspector>/itemID}"/>          
+                    <Label text="检测项目" />
+                    <Select
+                        id="itemID"
+						forceSelection="false"
+						selectedKey="{editInspector>/itemID}"
+						items="{item>/}">
+                        <core:Item key="{item>itemID}" text="{item>inspectionItem}" />
+                    </Select> 
                     <HBox>
 						<Button text="save" type="Emphasized" press=".onSaveEdit"/>
                         <Button text="cancel" press="onCloseEditDialog"/>  

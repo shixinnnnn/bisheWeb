@@ -1,0 +1,37 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+    <Dialog>
+        <form:SimpleForm
+			title="用户信息"
+			minWidth="1024"
+			maxContainerCols="2"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			labelSpanL="3"
+			labelSpanM="3"
+			emptySpanL="4"
+			emptySpanM="4"
+			columnsL="1"
+			columnsM="1">
+			<form:content>     
+                    <Label text="用户名" />
+                    <Text id="username" text="{administrator>/username}"/>    
+
+                    <Label text="密码" required="true"/>
+                    <Input id="password" value="{administrator>/password}"/>
+
+                    <Label text="邮箱" />
+                    <Input id="email" value="{administrator>/email}"/>
+
+                    <HBox>
+                        <Button text="save" type="Emphasized" press=".onSaveUserSetting"/>
+                        <Button text="cancel" press="onCloseUserSetting"/>  
+                    </HBox>
+            </form:content>
+		</form:SimpleForm>
+    </Dialog>
+</core:FragmentDefinition>
+

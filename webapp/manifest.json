@@ -41,10 +41,10 @@
 	},
 	"sap.ui5": {
 		"rootView": {
-			"viewName": "sap.ui.demo.toolpageapp.view.App",
+			"viewName": "sap.ui.demo.toolpageapp.view.myApp",
 			"type": "XML",
 			"async": true,
-			"id": "app"
+			"id": "myapp"
 		},
 		"dependencies": {
 			"minUI5Version": "1.30",
@@ -140,7 +140,7 @@
 		"routing": {
 			"config": {
 				"routerClass": "sap.m.routing.Router",
-				"controlId": "mainContents",
+				"controlId": "myapp",
 				"viewType": "XML",
 				"controlAggregation": "pages",
 				"viewPath": "sap.ui.demo.toolpageapp.view",
@@ -149,6 +149,16 @@
 			"routes": [
 				{
 					"pattern": "",
+					"name": "login",
+					"target": "login"
+				},
+				{
+					"pattern": "App/{username}",
+					"name": "app",
+					"target": "app"
+				},
+				{
+					"pattern": "Home",
 					"name": "home",
 					"target": "home"
 				},
@@ -199,6 +209,21 @@
 					"target": "manageInspectors"
 				},
 				{
+					"pattern": "Jurisdiction",
+					"name": "jurisdiction",
+					"target": "jurisdiction"
+				},
+				{
+					"pattern": "SubmitterJurisdiction",
+					"name": "submitterJurisdiction",
+					"target": "submitterJurisdiction"
+				},
+				{
+					"pattern": "ExpertJurisdiction",
+					"name": "expertJurisdiction",
+					"target": "expertJurisdiction"
+				},
+				{
 					"pattern": "ImportantLinks",
 					"name": "importantLinks",
 					"target": "importantLinks"
@@ -210,6 +235,14 @@
 				}
 			],
 			"targets": {
+				"login":{
+					"viewId": "login",
+					"viewName": "login"
+				},
+				"app":{
+					"viewId": "app",
+					"viewName": "App"
+				},
 				"home": {
 					"viewId": "home",
 					"viewName": "Home"
@@ -255,6 +288,18 @@
 				"manageInspectors":{
 					"viewId": "inspectorManage",
 					"viewName": "inspectorManage"
+				},
+				"jurisdiction": {
+					"viewId": "jurisdiction",
+					"viewName": "jurisdiction"
+				},
+				"submitterJurisdiction": {
+					"viewId": "submitterJurisdiction",
+					"viewName": "submitterJurisdiction"
+				},
+				"expertJurisdiction": {
+					"viewId": "expertJurisdiction",
+					"viewName": "expertJurisdiction"
 				},
 				"importantLinks": {
 					"viewId": "importantLinks",

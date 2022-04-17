@@ -11,7 +11,9 @@ sap.ui.define([
 	'sap/m/MessageToast',
 	'sap/ui/Device',
 	'sap/ui/core/syncStyleClass',
-	'sap/m/library'
+	'sap/m/library',
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/Fragment"
 ], function(
 	BaseController,
 	ResponsivePopover,
@@ -25,7 +27,9 @@ sap.ui.define([
 	MessageToast,
 	Device,
 	syncStyleClass,
-	mobileLibrary
+	mobileLibrary,
+	JSONModel,
+	Fragment
 ) {
 	"use strict";
 
@@ -52,74 +56,117 @@ sap.ui.define([
 
 			Device.media.attachHandler(this._handleWindowResize, this);
 			this.getRouter().attachRouteMatched(this.onRouteChange.bind(this));
+
+			var view = sap.ui.view({
+                type: sap.ui.core.mvc.ViewType.XML,
+                viewName: "sap.ui.demo.toolpageapp.view.Home"
+            });
+			var oScrollContainer = this.byId("app");
+			var oCurrentView = oScrollContainer.getMainContents();
+			oCurrentView[0].addPage(view);
 		},
+
+		onRouteChange:function(oEvent){
+			let username = oEvent.getParameter("arguments").username;
+			let that = this;
+			jQuery.get({
+				type: "GET",  //specical CASE for avoding error in backend Node middleware error
+                url: "http://124.222.52.43:3000/getAdministrator",
+                headers:{
+                    username:username
+                },
+                success:function(res){
+                    let oModel = new JSONModel(JSON.parse(res).data[0]);
+                    that.getView().setModel(oModel,"administrator");
+                },
+                datatype: "json"
+			})
+		},
+
+		// onRouteChange: function (oEvent) {
+		// 	this.getModel('side').setProperty('/selectedKey', oEvent.getParameter('name'));
+
+		// 	if (Device.system.phone) {
+		// 		this.onSideNavButtonPress();
+		// 	}
+		// },
 
 		onExit: function() {
 			Device.media.detachHandler(this._handleWindowResize, this);
 		},
 
-		onRouteChange: function (oEvent) {
-			this.getModel('side').setProperty('/selectedKey', oEvent.getParameter('name'));
-
-			if (Device.system.phone) {
-				this.onSideNavButtonPress();
-			}
-		},
-
 		onUserNamePress: function(oEvent) {
 			var oSource = oEvent.getSource();
-			this.getModel("i18n").getResourceBundle().then(function(oBundle){
-				// close message popover
-				var oMessagePopover = this.byId("errorMessagePopover");
-				if (oMessagePopover && oMessagePopover.isOpen()) {
-					oMessagePopover.destroy();
+			var oActionSheet = new ActionSheet(this.getView().createId("userMessageActionSheet"), {
+				title: '设置',
+				showCancelButton: false,
+				buttons: [
+					new Button({
+						text: '用户设置',
+						type: ButtonType.Transparent,
+						press: this.onUserSetting
+					}),
+					new Button({
+						text: '退出',
+						type: ButtonType.Transparent,
+						press: this.onLogout
+					})
+				],
+				afterClose: function () {
+					oActionSheet.destroy();
 				}
-				var fnHandleUserMenuItemPress = function (oEvent) {
-					this.getBundleText("clickHandlerMessage", [oEvent.getSource().getText()]).then(function(sClickHandlerMessage){
-						MessageToast.show(sClickHandlerMessage);
-					});
-				}.bind(this);
-				var oActionSheet = new ActionSheet(this.getView().createId("userMessageActionSheet"), {
-					title: oBundle.getText("userHeaderTitle"),
-					showCancelButton: false,
-					buttons: [
-						new Button({
-							text: '{i18n>userAccountUserSettings}',
-							type: ButtonType.Transparent,
-							press: fnHandleUserMenuItemPress
-						}),
-						new Button({
-							text: "{i18n>userAccountOnlineGuide}",
-							type: ButtonType.Transparent,
-							press: fnHandleUserMenuItemPress
-						}),
-						new Button({
-							text: '{i18n>userAccountFeedback}',
-							type: ButtonType.Transparent,
-							press: fnHandleUserMenuItemPress
-						}),
-						new Button({
-							text: '{i18n>userAccountHelp}',
-							type: ButtonType.Transparent,
-							press: fnHandleUserMenuItemPress
-						}),
-						new Button({
-							text: '{i18n>userAccountLogout}',
-							type: ButtonType.Transparent,
-							press: fnHandleUserMenuItemPress
-						})
-					],
-					afterClose: function () {
-						oActionSheet.destroy();
-					}
-				});
-				this.getView().addDependent(oActionSheet);
-				// forward compact/cozy style into dialog
-				syncStyleClass(this.getView().getController().getOwnerComponent().getContentDensityClass(), this.getView(), oActionSheet);
-				oActionSheet.openBy(oSource);
-			}.bind(this));
+			});
+			this.getView().addDependent(oActionSheet);
+			// forward compact/cozy style into dialog
+			syncStyleClass(this.getView().getController().getOwnerComponent().getContentDensityClass(), this.getView(), oActionSheet);
+			oActionSheet.openBy(oSource);
 		},
-
+		onUserSetting: function (oEvent) {
+			let that = this.oParent.oParent.oParent.getController();
+			if (!that._pUserSettingLoaded) {
+				that._pUserSettingLoaded = Fragment.load({
+					name: "sap.ui.demo.toolpageapp.view.userSetting",
+					id: "sap.ui.demo.toolpageapp.view.userSetting",
+					controller: that
+				});
+			}
+			that._pUserSettingLoaded.then(function (oDialog) {
+				that._oUserSettingDialog = oDialog;
+				that.getView().addDependent(that._oUserSettingDialog);
+				oDialog.open();
+			}.bind(that));
+		},
+		onSaveUserSetting:function(){
+			let username = Fragment.byId("sap.ui.demo.toolpageapp.view.userSetting","username").getText();
+			let password = Fragment.byId("sap.ui.demo.toolpageapp.view.userSetting","password").getValue();
+			let email = Fragment.byId("sap.ui.demo.toolpageapp.view.userSetting","email").getValue();
+			if(!password){
+				MessageToast.show("请输入必要信息！");
+				return;
+			}
+			let that = this;
+			jQuery.post({
+				type: "POST",  //specical CASE for avoding error in backend Node middleware error
+                url: "http://124.222.52.43:3000/editAdministrator",
+                headers:{
+                    username:username,
+					password:password,
+					email:email
+                },
+                success:function(res){
+					that._oUserSettingDialog.close();
+                    let oModel = new JSONModel(JSON.parse(res).data[0]);
+                    that.getView().setModel(oModel,"administrator");
+                },
+                datatype: "json"
+			})
+		},
+		onCloseUserSetting:function(){
+			this._oUserSettingDialog.close();
+		},
+		onLogout: function (oEvent) {
+			this.getRouter().navTo("login");
+		},
 		onSideNavButtonPress: function() {
 			var oToolPage = this.byId("app");
 			var bSideExpanded = oToolPage.getSideExpanded();
@@ -267,7 +314,7 @@ sap.ui.define([
 		 * @returns {Promise<string>} The promise
 		 */
 		getBundleText: function(sI18nKey, aPlaceholderValues){
-			return this.getBundleTextByModel(sI18nKey, this.getModel("i18n"), aPlaceholderValues);
+			return this.getBundleTextByModel(sI18nKey, this.getOwnerComponent().getModel("i18n"), aPlaceholderValues);
 		},
 
 		_handleWindowResize: function (oDevice) {
@@ -278,7 +325,17 @@ sap.ui.define([
 				// desktop to tablet screen sizes)
 				this._bExpanded = (oDevice.name === "Desktop");
 			}
+		},
+		onSelect:function(oEvent){
+			let name = oEvent.oSource.mProperties.key;
+			var view = sap.ui.view({
+                type: sap.ui.core.mvc.ViewType.XML,
+                viewName: "sap.ui.demo.toolpageapp.view."+name
+            });
+			var oScrollContainer = this.byId("app");
+			var oCurrentView = oScrollContainer.getMainContents();
+			oCurrentView[0].removeAllPages();
+			oCurrentView[0].addPage(view);
 		}
-
 	});
 });

@@ -1,0 +1,29 @@
+<mvc:View
+	controllerName="sap.ui.demo.toolpageapp.controller.login"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<FlexBox
+		class="main"
+		alignItems="Center"
+		direction="Column">
+		<Image src="https://shixin-1310229469.cos.ap-shanghai.myqcloud.com/%E6%88%91%E7%9A%84.png" width="" />
+		<Text text="第三方医学实验室后台管理系统" class="loginTitle"/>
+		<Input
+			id="username"
+			placeholder="请输入用户名"
+			valueLiveUpdate="true"
+			width="300px"/>
+		<Input
+			id="password"
+			type="Password"
+			placeholder="请输入密码"
+			valueLiveUpdate="true"
+			width="300px"/>
+		<Button
+		text="登录"
+		press=".onLogin"
+		width="300px"/>
+	</FlexBox>
+</mvc:View>

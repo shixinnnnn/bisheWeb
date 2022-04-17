@@ -17,7 +17,10 @@
 			columnsL="1"
 			columnsM="1">
 			<form:content> 
-                <VBox>                 
+                <VBox>       
+                    <Label text="检测项目ID"/>
+                    <Text id="itemID" text="{editItem>/itemID}"/>    
+
                     <Label text="检测项目名称" required="true"/>
                     <Input id="itemName" placeholder="请输入检测项目名称" value="{editItem>/inspectionItem}"/>    
 
@@ -30,9 +33,9 @@
                     <Label text="检测展示图片url" required="true"/>
                     <HBox>                           
                         <Input id="picture" placeholder="请输入检测展示图片url" value="{editItem>/picture}"/>
-                        <Button text="预览" press="foreseePic"/>                          
+                        <Button text="预览" press="foreseeEditPic"/>                          
                     </HBox>
-                    <Image id="foresawPic" width="80%"/>
+                    <Image id="foresawPic" width="80%" src="{editItem>/picture}"/>
 
                     <Label text="检测项目简介" required="true"/>
                     <Input id="description" placeholder="请输入检测项目简介" value="{editItem>/description}"/>          

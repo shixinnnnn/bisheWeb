@@ -30,7 +30,7 @@
                     <Label text="检测展示图片url" required="true"/>
                     <HBox>                           
                         <Input id="picture" placeholder="请输入检测展示图片url"/>
-                        <Button text="预览" press="foreseePic"/>                          
+                        <Button text="预览" press="foreseeAddPic"/>                          
                     </HBox>
                     <Image id="foresawPic" width="80%"/>
 

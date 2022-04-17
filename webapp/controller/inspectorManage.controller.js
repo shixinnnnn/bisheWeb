@@ -18,6 +18,15 @@ sap.ui.define([
                     that.getView().setModel(oModel,"inspector");
                 },
                 datatype: "json"
+            });
+			jQuery.get({     //save data local JSON file
+                type: "GET",  //specical CASE for avoding error in backend Node middleware error
+                url: "http://124.222.52.43:3000/getInspectionItem",
+                success:function(res){
+                    let oModel = new JSONModel(JSON.parse(res).data);
+                    that.getView().setModel(oModel,"item");
+                },
+                datatype: "json"
             })
 		},
 
@@ -70,7 +79,7 @@ sap.ui.define([
             var inspectorName = Fragment.byId("sap.ui.demo.toolpageapp.view.inspectorAdd","inspectorName").getValue();
             var email = Fragment.byId("sap.ui.demo.toolpageapp.view.inspectorAdd","email").getValue();
             var password = Fragment.byId("sap.ui.demo.toolpageapp.view.inspectorAdd","password").getValue();
-            var itemID = Fragment.byId("sap.ui.demo.toolpageapp.view.inspectorAdd","itemID").getValue();
+            var itemID = Fragment.byId("sap.ui.demo.toolpageapp.view.inspectorAdd","itemID").getSelectedKey();
 			if(!inspectorID || !inspectorName){
 				MessageToast.show("请输入必要信息!");
 				return;
@@ -168,7 +177,7 @@ sap.ui.define([
             var inspectorName = Fragment.byId("sap.ui.demo.toolpageapp.view.inspectorEdit","inspectorName").getValue();
             var email = Fragment.byId("sap.ui.demo.toolpageapp.view.inspectorEdit","email").getValue();
             var password = Fragment.byId("sap.ui.demo.toolpageapp.view.inspectorEdit","password").getValue();
-            var itemID = Fragment.byId("sap.ui.demo.toolpageapp.view.inspectorEdit","itemID").getValue();
+            var itemID = Fragment.byId("sap.ui.demo.toolpageapp.view.inspectorEdit","itemID").getSelectedKey();
 			if(!inspectorName){
 				MessageToast.show("请输入必要信息!");
 				return;

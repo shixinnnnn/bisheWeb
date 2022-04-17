@@ -65,9 +65,13 @@ sap.ui.define([
 				oDialog.open();
 			}.bind(this));
 		},
-        foreseePic:function(){
+        foreseeAddPic:function(){
             let picUrl = Fragment.byId("sap.ui.demo.toolpageapp.view.itemAdd","picture").getValue();
             Fragment.byId("sap.ui.demo.toolpageapp.view.itemAdd","foresawPic").setSrc(picUrl);
+        },
+        foreseeEditPic:function(){
+            let picUrl = Fragment.byId("sap.ui.demo.toolpageapp.view.itemEdit","picture").getValue();
+            Fragment.byId("sap.ui.demo.toolpageapp.view.itemEdit","foresawPic").setSrc(picUrl);
         },
 		onSaveAdd:async function(){
 			var itemName = Fragment.byId("sap.ui.demo.toolpageapp.view.itemAdd","itemName").getValue();

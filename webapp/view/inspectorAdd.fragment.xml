@@ -30,8 +30,13 @@
                     <Label text="登陆密码" />
                     <Input id="password" placeholder="请输入登陆密码"/>
 
-                    <Label text="检测项目ID" />
-                    <Input id="itemID" placeholder="请输入检测项目ID"/>          
+                    <Label text="检测项目" />
+                    <Select
+                        id="itemID"
+						forceSelection="false"
+						items="{item>/}">
+                        <core:Item key="{item>itemID}" text="{item>inspectionItem}" />
+                    </Select>        
                     <HBox>
 						<Button text="save" type="Emphasized" press=".onSaveAdd"/>
                         <Button text="cancel" press="onCloseAddDialog"/>  

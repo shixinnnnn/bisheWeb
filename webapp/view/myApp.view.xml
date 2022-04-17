@@ -1,0 +1,11 @@
+<mvc:View
+	controllerName="sap.ui.demo.toolpageapp.controller.myApp"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Shell>
+		<App id="myapp"
+			busy="{appView>/busy}"
+			busyIndicatorDelay="{appView>/delay}"/>
+	</Shell>
+</mvc:View>

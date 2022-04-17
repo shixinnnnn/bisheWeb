@@ -1,10 +1,11 @@
 <mvc:View
-	controllerName="sap.ui.demo.toolpageapp.controller.inspectorManage"
+	controllerName="sap.ui.demo.toolpageapp.controller.submitterJurisdiction"
 	xmlns="sap.uxap"
 	xmlns:f="sap.ui.layout.form"
 	xmlns:m="sap.m"
 	xmlns:core="sap.ui.core"
-	xmlns:mvc="sap.ui.core.mvc">
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:commons="sap.suite.ui.commons">
 	<m:Page
 		showHeader="{device>/system/phone}"
 		showNavButton="{device>/system/phone}"
@@ -19,7 +20,7 @@
 		<ObjectPageLayout id="objectPageLayout">
 			<headerTitle>
 				<ObjectPageHeader
-					objectTitle="{i18n>sideContentManageInspectors}"
+					objectTitle="{i18n>sideContentUsagesideSubmitterJurisdiction}"
 					objectSubtitle="{i18n>systemSettingsDescriptionTitle}"/>
 			</headerTitle>
 			<headerContent>
@@ -60,18 +61,22 @@
                                                     noDataText="{worklistView>/tableNoDataText}"
                                                     updateFinished=".onUpdateFinished"
                                                     width="auto"
-                                                    mode="MultiSelect"
-                                                    items="{inspector>/}">
+                                                    items="{submitter>/}">
                                                     <m:columns>
-                                                        <m:Column id="inspectorIDColumn">
+                                                        <m:Column id="hospitalColumn">
                                                             <m:Text
-                                                                id="inspectorID"
-                                                                text="检测员ID"/>
+                                                                id="hospital"
+                                                                text="医院"/>
                                                         </m:Column>	
-                                                        <m:Column id="inspectorNameColumn">
+                                                        <m:Column id="submitterIDColumn">
                                                             <m:Text
-                                                                id="inspectorName"
-                                                                text="检测员姓名"/>
+                                                                id="submitterID"
+                                                                text="送检员ID"/>
+                                                        </m:Column>
+                                                        <m:Column id="submitterNameColumn">
+                                                            <m:Text
+                                                                id="submitterName"
+                                                                text="送检员姓名"/>
                                                         </m:Column>
                                                         <m:Column id="emailColumn">
                                                             <m:Text
@@ -83,36 +88,41 @@
                                                                 id="password"
                                                                 text="登陆密码"/>
                                                         </m:Column>
-                                                        <m:Column id="itemColumn">
+                                                        <m:Column id="managerColumn">
                                                             <m:Text
-                                                                id="item"
-                                                                text="检测项目"/>
+                                                                id="manager"
+                                                                text="团队管理权限"/>
                                                         </m:Column>								
                                                     </m:columns>
                                                 <m:items>
                                                     <m:ColumnListItem
                                                         type="Navigation"
                                                         press=".onPress">
+                                                        <m:customData>
+                                                                <core:CustomData key="{submitter>hospitalID}" value="{submitter>hospitalID}"/>
+                                                                <core:CustomData key="{submitter>submitterID}" value="{submitter>submitterID}"/>
+                                                        </m:customData>
                                                         <m:cells>
                                                             <m:ObjectIdentifier
-                                                                text="{inspector>inspectorID}"/>
+                                                                text="{submitter>hospital}"/>
+                                                                <m:ObjectIdentifier
+                                                                text="{submitter>submitterID}"/>
                                                             <m:ObjectIdentifier
-                                                                text="{inspector>name}"/> 
+                                                                text="{submitter>name}"/> 
                                                             <m:ObjectIdentifier
-                                                                text="{inspector>email}"/> 
+                                                                text="{submitter>email}"/> 
                                                             <m:ObjectIdentifier
-                                                                text="{inspector>password}"/> 
-                                                            <m:ObjectIdentifier
-                                                                text="{inspector>inspectionItem}"/>     
+                                                                text="{submitter>password}"/> 
+                                                            <m:SegmentedButton selectedKey="{submitter>manager}" class="sapUiSmallMarginBottom" selectionChange="onChangeSelect">
+                                                                <m:items>
+                                                                    <m:SegmentedButtonItem icon="sap-icon://accept" key="1"/>
+                                                                    <m:SegmentedButtonItem icon="sap-icon://decline" key="0"/>
+                                                                </m:items>
+                                                            </m:SegmentedButton>                                                           
                                                         </m:cells>
                                                     </m:ColumnListItem>
                                                 </m:items>
                                                 </m:Table>
-                                                <m:HBox>
-                                                    <m:Button text="添加" press="onAdd"/>
-                                                    <m:Button text="编辑" press="onEdit"/>
-                                                    <m:Button text="删除" press="onDelete"/>
-                                                </m:HBox>	
                                             </m:VBox>							
 									</f:content>
 								</f:SimpleForm>

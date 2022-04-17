@@ -17,6 +17,9 @@
 			columnsL="1"
 			columnsM="1">
 			<form:content>                  
+						<Label text="医院ID"/>
+                        <Text id="hospitalID" text="{editHospital>/hospital}"/>
+
                         <Label text="医院名称" required="true"/>
                         <Input id="hospitalName" placeholder="请输入医院名称" value="{editHospital>/hospital}"/>                 
                     <HBox>

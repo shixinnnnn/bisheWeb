@@ -20,7 +20,7 @@
 				</Button>
 				<ToolbarSpacer/>
 				<Title
-					text="{i18n>appTitle}"
+					text="HealthCare医学实验室"
 					level="H2"/>
 				<ToolbarSpacer/>
 				<Button
@@ -47,7 +47,7 @@
 				</Button>
 				<Button
 					id="userButton"
-					text="{i18n>userName}"
+					text="{administrator>/username}"
 					type="Transparent"
 					press=".onUserNamePress">
 					<layoutData>
@@ -74,11 +74,11 @@
 							templateShareable: false
 						}"
 						key="{side>key}"
-						href="#/{side>key}">
+						select="onSelect">
 						<tnt:NavigationListItem
 							text="{path: 'side>titleI18nKey', formatter: '.getBundleText'}"
 							key="{side>key}"
-							href="#/{side>key}">
+							select="onSelect">
 						</tnt:NavigationListItem>
 					</tnt:NavigationListItem>
 				</tnt:NavigationList>

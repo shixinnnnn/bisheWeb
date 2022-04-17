@@ -6,7 +6,7 @@
 			"titleI18nKey": "sideContentHome",
 			"icon": "sap-icon://home",
 			"expanded": true,
-			"key": "",
+			"key": "Home",
 			"items": []
 		},
 		{
@@ -20,7 +20,7 @@
 			"titleI18nKey": "sideContentStatistics",
 			"icon": "sap-icon://line-chart",
 			"expanded": true,
-			"key": "statistics",
+			"key": "Statistics",
 			"items": [
 				{
 					"titleI18nKey": "sideContentUsageStatistics",
@@ -36,21 +36,21 @@
 			"titleI18nKey": "sideContentManageHospitals",
 			"icon": "sap-icon://accidental-leave",
 			"expanded": false,
-			"key": "manageHospitals",
+			"key": "hospitalManage",
 			"items": []
 		},
 		{
 			"titleI18nKey": "sideContentManageItems",
 			"icon": "sap-icon://lab",
 			"expanded": false,
-			"key": "manageItems",
+			"key": "itemManage",
 			"items": []
 		},
 		{
 			"titleI18nKey": "sideContentManageInspectors",
 			"icon": "sap-icon://employee",
 			"expanded": false,
-			"key": "manageInspectors",
+			"key": "inspectorManage",
 			"items": []
 		},
 		{
@@ -60,12 +60,12 @@
 			"key": "jurisdiction",
 			"items": [
 				{
-					"titleI18nKey": "sideContentUsageStatistics",
-					"key": "usageStatistics"
+					"titleI18nKey": "sideContentUsagesideSubmitterJurisdiction",
+					"key": "submitterJurisdiction"
 				},
 				{
-					"titleI18nKey": "sideContentOrderStatistics",
-					"key": "orderStatistics"
+					"titleI18nKey": "sideContentUsagesideExpertJurisdiction",
+					"key": "expertJurisdiction"
 				}
 			]
 		}
