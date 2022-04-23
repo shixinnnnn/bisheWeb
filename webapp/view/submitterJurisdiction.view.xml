@@ -78,16 +78,6 @@
                                                                 id="submitterName"
                                                                 text="送检员姓名"/>
                                                         </m:Column>
-                                                        <m:Column id="emailColumn">
-                                                            <m:Text
-                                                                id="email"
-                                                                text="注册邮箱"/>
-                                                        </m:Column>	
-                                                        <m:Column id="passwordColumn">
-                                                            <m:Text
-                                                                id="password"
-                                                                text="登陆密码"/>
-                                                        </m:Column>
                                                         <m:Column id="managerColumn">
                                                             <m:Text
                                                                 id="manager"
@@ -95,9 +85,7 @@
                                                         </m:Column>								
                                                     </m:columns>
                                                 <m:items>
-                                                    <m:ColumnListItem
-                                                        type="Navigation"
-                                                        press=".onPress">
+                                                    <m:ColumnListItem>
                                                         <m:customData>
                                                                 <core:CustomData key="{submitter>hospitalID}" value="{submitter>hospitalID}"/>
                                                                 <core:CustomData key="{submitter>submitterID}" value="{submitter>submitterID}"/>
@@ -109,10 +97,6 @@
                                                                 text="{submitter>submitterID}"/>
                                                             <m:ObjectIdentifier
                                                                 text="{submitter>name}"/> 
-                                                            <m:ObjectIdentifier
-                                                                text="{submitter>email}"/> 
-                                                            <m:ObjectIdentifier
-                                                                text="{submitter>password}"/> 
                                                             <m:SegmentedButton selectedKey="{submitter>manager}" class="sapUiSmallMarginBottom" selectionChange="onChangeSelect">
                                                                 <m:items>
                                                                     <m:SegmentedButtonItem icon="sap-icon://accept" key="1"/>

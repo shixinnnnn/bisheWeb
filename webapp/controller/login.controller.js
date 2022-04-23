@@ -1,7 +1,8 @@
 sap.ui.define([
 	"./BaseController",
-	"sap/ui/model/json/JSONModel"
-], function (BaseController, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	'sap/m/MessageToast'
+], function (BaseController, JSONModel,MessageToast) {
 	"use strict";
 
 	return BaseController.extend("com.sap.manageFlp.controller.login", {
@@ -17,11 +18,13 @@ sap.ui.define([
 					password:password
                 },
                 success:function(res){
-                    //let oModel = new JSONModel(JSON.parse(res).data);
-                    // that.getView().setModel(oModel,"item");
-					that.getRouter().navTo("app",{
-						username:JSON.parse(res).data[0].username
-					});
+                    if(res.length == 6){
+						MessageToast.show(res)
+					}else{
+						that.getRouter().navTo("app",{
+							username:JSON.parse(res).data[0].username
+						});
+					}					
                 },
                 datatype: "json"
 			})

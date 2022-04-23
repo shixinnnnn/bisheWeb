@@ -165,7 +165,8 @@ sap.ui.define([
 			this._oUserSettingDialog.close();
 		},
 		onLogout: function (oEvent) {
-			this.getRouter().navTo("login");
+			let that = this.oParent.oParent.oParent.getController();
+			that.getRouter().navTo("login");
 		},
 		onSideNavButtonPress: function() {
 			var oToolPage = this.byId("app");

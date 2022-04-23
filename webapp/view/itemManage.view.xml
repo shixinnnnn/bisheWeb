@@ -95,9 +95,7 @@
                                                         </m:Column>								
                                                     </m:columns>
                                                 <m:items>
-                                                    <m:ColumnListItem
-                                                        type="Navigation"
-                                                        press=".onPress">
+                                                    <m:ColumnListItem>
                                                         <m:cells>
                                                             <m:ObjectIdentifier
                                                                 text="{item>itemID}"/>
